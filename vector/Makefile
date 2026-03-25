@@ -3,7 +3,7 @@
 all: vector_test
 
 vector_test: Vector.cpp 
-	g++ $> -o $@ -L. -lVectorTest -std=c++11
+	g++ $< -o $@ -L. -lVectorTest -std=c++11
 
 clean:
 	rm -rf *.o vector_test
