@@ -108,7 +108,7 @@ void Vector::popFront() {
 
 void Vector::erase(size_t pos, size_t count) {
     if (pos + count < _size) {
-        std::memmove(_data+pos, _data+pos+count, count * sizeof(ValueType));
+        std::memmove(_data+pos, _data+pos+count, (_size-pos-count) * sizeof(ValueType));
         _size -= count;
         return;
     }
@@ -117,7 +117,7 @@ void Vector::erase(size_t pos, size_t count) {
 
 void Vector::eraseBetween(size_t beginPos, size_t endPos) {
     if (endPos < _size) {
-        std::memmove(_data+beginPos, _data+endPos, (endPos-beginPos) * sizeof(ValueType));
+        std::memmove(_data+beginPos, _data+endPos, (_size-endPos) * sizeof(ValueType));
         _size -= endPos - beginPos;
         return;
     }
