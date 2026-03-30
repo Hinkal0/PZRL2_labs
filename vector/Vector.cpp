@@ -31,19 +31,20 @@ Vector& Vector::operator=(const Vector& other) {
     return *this;
 }
 
-Vector::Vector(Vector&& other) noexcept 
-    : _capacity {other._capacity}, _size {other._size},
-    _multiplicativeCoef {other._multiplicativeCoef}, _data {other._data} {
-    other._size = 0;
-    other._capacity = 0;
-    other._data = nullptr;
+Vector::Vector(Vector&& other) noexcept {
+	*this = std::move(other);
 }
 
 Vector& Vector::operator=(Vector&& other) noexcept {
+	if (this == &other) return *this;
+
     _capacity = other._capacity;
     _size = other._size;
     _multiplicativeCoef = other._multiplicativeCoef;
-    std::swap(_data, other._data);
+
+	std::swap(_data, other._data);
+	other._size = 0;
+	other._capacity = 0;
 
     return *this;
 }
