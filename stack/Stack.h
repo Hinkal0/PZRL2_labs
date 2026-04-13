@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 // Уровень абстракции
 // клиентский код подключает именно этот хедер
 
@@ -45,7 +46,6 @@ public:
 private:
     // указатель на имплементацию (уровень реализации)
     IStackImplementation* _pimpl = nullptr;
-    // тип контейнера, наверняка понадобится
-    StackContainer _containerType;
+	StackContainer _containerType;
 };
 

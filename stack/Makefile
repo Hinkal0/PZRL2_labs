@@ -6,8 +6,17 @@ LIBTEST=StackTest
 
 all: $(TEST)
 
-$(TEST): $(SOURCE)
-	g++ $< -o $@ -L. -l$(LIBTEST) -std=c++11
+$(TEST): Stack.o VectorStack.o LinkedListStack.o
+	g++ Stack.o VectorStack.o LinkedListStack.o -o $@ -L. -l$(LIBTEST) -std=c++11
+
+Stack.o: Stack.cpp
+	g++ -c Stack.cpp
+
+VectorStack.o: VectorStack.cpp
+	g++ -c Vector.cpp
+
+LinkedListStack.o: LinkedListStack.cpp
+	g++ -c LinkedListStack.cpp
 
 clean:
 	rm -rf *.o $(TEST)
