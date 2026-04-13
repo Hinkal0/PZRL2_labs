@@ -1,12 +1,16 @@
 .PHONY: all clean run
 
-all: vector_test
+TEST=vector_test
+SOURCE=Vector.cpp
+LIBTEST=VectorTest
 
-vector_test: Vector.cpp 
-	g++ $< -o $@ -L. -lVectorTest -std=c++11
+all: $(TEST)
+
+$(TEST): $(SOURCE)
+	g++ $< -o $@ -L. -l$(LIBTEST) -std=c++11
 
 clean:
-	rm -rf *.o vector_test
+	rm -rf *.o $(TEST)
 
 run: all
-	./vector_test
+	./$(TEST)
