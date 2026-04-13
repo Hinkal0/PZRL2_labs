@@ -46,6 +46,6 @@ public:
 private:
     // указатель на имплементацию (уровень реализации)
     IStackImplementation* _pimpl = nullptr;
-	StackContainer _containerType;
+    StackContainer _containerType;
 };
 

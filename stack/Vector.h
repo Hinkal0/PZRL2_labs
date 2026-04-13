@@ -1,9 +1,10 @@
 #pragma once
-#include <stdlib.h>
-#include "StackImplementation.h"
 
+#include <stdlib.h>
+
+using ValueType = double;
 //! \brief Класс, реализующий С++ контейнер vector для типа double
-class Vector : IStackImplementation
+class Vector
 {
 public:
     /*!
@@ -31,7 +32,7 @@ public:
     ~Vector();
 
 	//! Вставка в конец
-    void push(const ValueType& value) override;
+    void pushBack(const ValueType& value);
 	//! Вставка в начало
     void pushFront(const ValueType& value);
 
@@ -43,11 +44,9 @@ public:
     void insert(const Vector& vector, size_t pos);
 
 	//! Удаление с конца
-    void pop() override;
+    void popBack();
 	//! Удаление из начала
     void popFront();
-
-	ValueType& top() override;
 
     /*!
         \brief Удалить элемент(ы) из вектора
@@ -66,11 +65,9 @@ public:
         если endPos > size, то элементы интервала [beginPos, size) должны быть удалены
     */
     void eraseBetween(size_t beginPos, size_t endPos);
-	
-	bool isEmpty() const override;
 
 	//! Количество элементов
-    size_t size() const override;
+    size_t size() const;
 	//! Максимальное количество элементов
     size_t capacity() const;
 	//! Фактор загруженности

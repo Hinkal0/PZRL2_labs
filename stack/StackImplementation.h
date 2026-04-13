@@ -1,4 +1,7 @@
 #pragma once
+#include <cstddef>
+#include "Vector.h"
+#include "LinkedList.h"
 
 using ValueType = double;
 
@@ -17,4 +20,24 @@ public:
     virtual size_t size() const = 0;
     // виртуальный деструктор
     virtual ~IStackImplementation() = default;
+};
+
+class VectorStack : public IStackImplementation {
+    Vector container;
+public:
+    void push(const ValueType& value) override;
+    void pop() override;
+    const ValueType& top() const override;
+    bool isEmpty() const override;
+    size_t size() const override;
+};
+
+class LinkedListStack : public IStackImplementation {
+    DoubleLinkedList container;
+public:
+    void push(const ValueType& value) override;
+    void pop() override;
+    const ValueType& top() const override;
+    bool isEmpty() const override;
+    size_t size() const override;
 };

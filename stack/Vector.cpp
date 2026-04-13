@@ -1,4 +1,4 @@
-#include "VectorStack.h"
+#include "Vector.h"
 #include <cstring>
 #include <utility>
 #include <stdexcept>
@@ -54,7 +54,7 @@ Vector::~Vector() {
 }
 
 
-void Vector::push(const ValueType& value) {
+void Vector::pushBack(const ValueType& value) {
     if (_size == _capacity) {
         reserve((_size+1) * _multiplicativeCoef);
     }
@@ -96,7 +96,7 @@ void Vector::insert(const Vector& vector, size_t pos) {
     insert(vector._data, vector._size, pos);
 }
 
-void Vector::pop() {
+void Vector::popBack() {
     if (!_size) throw std::runtime_error("Pop back from empty vector");
     --_size;
 }
@@ -106,9 +106,6 @@ void Vector::popFront() {
     std::memmove(_data, _data+1, (--_size) * sizeof(ValueType));
 }
 
-ValueType& Vector::top() {
-	return *(this->end());
-}
 
 void Vector::erase(size_t pos, size_t count) {
     if (pos + count < _size) {
@@ -126,10 +123,6 @@ void Vector::eraseBetween(size_t beginPos, size_t endPos) {
         return;
     }
     _size = beginPos;
-}
-
-bool Vector::isEmpty() const {
-	return _size == 0;
 }
 
 size_t Vector::size() const {

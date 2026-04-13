@@ -1,4 +1,4 @@
-#include "LinkedListStack.h"
+#include "LinkedList.h"
 
 DoubleLinkedList::DoubleLinkedList(const DoubleLinkedList& fl) {
 	Node* t1 = fl.head;
@@ -64,7 +64,7 @@ void DoubleLinkedList::pop_front() {
     delete t;
 }
 
-void DoubleLinkedList::push(double val) {
+void DoubleLinkedList::push_back(double val) {
 	if (tail) {
 		tail->next = new Node({val, nullptr, tail});
 		tail = tail->next;
@@ -73,7 +73,7 @@ void DoubleLinkedList::push(double val) {
 	head = tail = new Node({val, nullptr, nullptr});
 }
 
-void DoubleLinkedList::pop() {
+void DoubleLinkedList::pop_back() {
 	if (!tail) return;
 	if (!tail->prev) {
 		delete tail;
@@ -114,10 +114,6 @@ const double& DoubleLinkedList::back() const {
 	return tail->val;
 }
 
-const double& DoubleLinkedList::top() const {
-	return tail->val;
-}
-
 size_t DoubleLinkedList::size() const {
     const Node* current = head;
     size_t s = 0;
@@ -128,7 +124,7 @@ size_t DoubleLinkedList::size() const {
     return s;
 }
 
-bool DoubleLinkedList::isEmpty() const {
+bool DoubleLinkedList::empty() const {
     return head == nullptr;
 }
 
