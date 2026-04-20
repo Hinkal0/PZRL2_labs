@@ -31,10 +31,10 @@ Stack::Stack(const Stack& copyStack) : _containerType {copyStack._containerType}
     if (!copyStack._pimpl) return;
     switch (_containerType) {
     case StackContainer::Vector:
-        _pimpl = new VectorStack(*(VectorStack*)copyStack._pimpl);
+        _pimpl = new VectorStack(*dynamic_cast<VectorStack*>(copyStack._pimpl));
         break;
     case StackContainer::List:
-        _pimpl = new LinkedListStack(*(LinkedListStack*)copyStack._pimpl);
+        _pimpl = new LinkedListStack(*dynamic_cast<LinkedListStack*>(copyStack._pimpl));
         break;
     }
 }
@@ -51,10 +51,10 @@ Stack& Stack::operator=(const Stack& copyStack) {
 
     switch (_containerType) {
     case StackContainer::Vector:
-    	_pimpl = new VectorStack(*(VectorStack*)copyStack._pimpl);
+    	_pimpl = new VectorStack(*dynamic_cast<VectorStack*>(copyStack._pimpl));
     	break;
     case StackContainer::List:
-    	_pimpl = new LinkedListStack(*(LinkedListStack*)copyStack._pimpl);
+    	_pimpl = new LinkedListStack(*dynamic_cast<LinkedListStack*>(copyStack._pimpl));
     	break;
     }
     
