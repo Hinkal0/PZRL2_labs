@@ -73,7 +73,9 @@ BinarySearchTree::Node* BinarySearchTree::copySubtree(const Node* other) {
 
     Node* n = new Node(*other);
     n->left = copySubtree(other->left);
+	if (n->left) n->left->parent = n;
     n->right = copySubtree(other->right);
+	if (n->right) n->right->parent = n;
     return n;
 }
 
