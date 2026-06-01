@@ -1,7 +1,6 @@
 #pragma once
 #include <cstddef>
 #include <tuple>
-#include <limits>
 
 /**
  * @brief Класс SplayTree — самобалансирующееся дерево поиска (splay tree).
@@ -83,7 +82,7 @@ public:
     void insert(const Key& key, const Value& value) {
     	if (!_root) {
     	    _root = new Node(key, value);
-    	    _root->right = new Node(std::numeric_limits<Key>::max(), value, _root);
+    	    _root->right = new Node(Key(), value, _root);
     	    ++_size;
     	    return;
     	}
@@ -116,6 +115,12 @@ public:
 
     	return nullptr;
 		
+	}
+
+	const Node* end() const {
+		const Node* current = _root;
+		while (current->right) current = current->right;
+		return current;
 	}
 
 	Node* end() {
@@ -214,7 +219,12 @@ public:
      */
     bool isValidBST() const {
 		if (!_root) return 1;
-		return _root->isValid();
+    	
+		const Node* _end = end();
+
+		bool valid = _root->isValid(_end);
+		
+		return valid;
 	}
 
     /**
@@ -245,13 +255,13 @@ private:
 		Node(Key key, Value value, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr) 
     	: keyValuePair(key, value), parent(parent), left(left), right(right) {}
         
-		bool isValid() {
-			if (left && left->keyValuePair.first > keyValuePair.first) return false;
-			if (right && right->keyValuePair.first < keyValuePair.first) return false;
+		bool isValid(const Node* _end) {
+			if (left && left != _end && left->keyValuePair.first > keyValuePair.first) return false;
+			if (right && right != _end && right->keyValuePair.first < keyValuePair.first) return false;
 			bool v1 = 1;
 			bool v2 = 1;
-			if (left) v1 = left->isValid();
-			if (right) v2 = right->isValid();
+			if (left) v1 = left->isValid(_end);
+			if (right) v2 = right->isValid(_end);
 			return v1 && v2;
 		}
 
